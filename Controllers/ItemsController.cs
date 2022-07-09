@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DemoWebapp.Data;
 using DemoWebapp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DemoWebapp.Controllers
 {
@@ -60,6 +61,7 @@ namespace DemoWebapp.Controllers
         }
 
         // GET: Items/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -68,6 +70,7 @@ namespace DemoWebapp.Controllers
         // POST: Items/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description")] Item item)
@@ -100,6 +103,7 @@ namespace DemoWebapp.Controllers
         // POST: Items/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Description")] Item item)
@@ -133,6 +137,7 @@ namespace DemoWebapp.Controllers
         }
 
         // GET: Items/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.Item == null)
@@ -151,6 +156,7 @@ namespace DemoWebapp.Controllers
         }
 
         // POST: Items/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
