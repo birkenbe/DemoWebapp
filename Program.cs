@@ -28,6 +28,8 @@ else
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -40,5 +42,23 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+try
+{
+    var dbContext = app.Services.GetRequiredService<ApplicationDbContext>();
+
+    if (dbContext.Database.IsSqlServer())
+    {
+        dbContext.Database.Migrate();
+    }
+}
+catch (Exception ex)
+{
+    var logger = app.Logger;
+
+    logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+
+    throw;
+}
 
 app.Run();

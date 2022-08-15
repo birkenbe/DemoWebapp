@@ -16,7 +16,7 @@ services:
       dockerfile: Dockerfile
     container_name: demowebapp
     environment: 
-            DefaultConnection: "Server=demowebapp-db, 1433;Database=aspnet-DemoWebapp-092B5681-86FC-448E-BA53-E7D0DBACAE5E;User ID=SA;Password=dev*5*elopmentPw"
+            ConnectionStrings__DefaultConnection: "Server=demowebapp-db, 1433;Database=master;User ID=SA;Password=dev*5*elopmentPw"
             ASPNETCORE_HTTP_PORT: "https://+:5001"
             ASPNETCORE_URLS: "http://+:5000"
     ports:
